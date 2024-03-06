@@ -101,7 +101,6 @@ def save_reminder(user_id, message, timestamp):
 
 @tasks.loop(seconds=1.0) 
 async def check_reminders():
-    logging.info("Checking reminders...")
     while reminders and reminders[0][0] <= time.time():
         _, user_id, message = heapq.heappop(reminders)
         user = user_map.get(user_id)
